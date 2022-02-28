@@ -20,7 +20,6 @@
     ],
     "semi": ["error", "always"],
     "quotes": ["error", "double"],
-    "eslint linebreak-style": ["error", "windows"],
     "react/react-in-jsx-scope": "off",
     "linebreak-style": "off",
     "jsx-a11y/anchor-is-valid": "off",
