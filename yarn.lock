@@ -3020,6 +3020,15 @@
     "normalize-path" "^3.0.0"
     "picomatch" "^2.0.4"
 
+"aos@^2.3.4":
+  "integrity" "sha512-zh/ahtR2yME4I51z8IttIt4lC1Nw0ktsFtmeDzID1m9naJnWXhCoARaCgNOGXb5CLy3zm+wqmRAEgMYB5E2HUw=="
+  "resolved" "https://registry.npmjs.org/aos/-/aos-2.3.4.tgz"
+  "version" "2.3.4"
+  dependencies:
+    "classlist-polyfill" "^1.0.3"
+    "lodash.debounce" "^4.0.6"
+    "lodash.throttle" "^4.0.1"
+
 "app-root-dir@^1.0.2":
   "integrity" "sha1-OBh+wt6nV3//Az/8sSFyaS/24Rg="
   "resolved" "https://registry.npmjs.org/app-root-dir/-/app-root-dir-1.0.2.tgz"
@@ -3890,6 +3899,11 @@
     "define-property" "^0.2.5"
     "isobject" "^3.0.0"
     "static-extend" "^0.1.1"
+
+"classlist-polyfill@^1.0.3":
+  "integrity" "sha1-k1vC39lFiodrJ5YXUUY4vKqWSi4="
+  "resolved" "https://registry.npmjs.org/classlist-polyfill/-/classlist-polyfill-1.2.0.tgz"
+  "version" "1.2.0"
 
 "clean-css@^4.2.3":
   "integrity" "sha512-EJUDT7nDVFDvaQgAo2G/PJvxmp1o/c6iXLbswsBbUFXi1Nr+AjA2cKmfbKDMjMvzEe75g3P6JkaDDAKk96A85A=="
@@ -6963,7 +6977,7 @@
   dependencies:
     "p-locate" "^5.0.0"
 
-"lodash.debounce@^4.0.8":
+"lodash.debounce@^4.0.6", "lodash.debounce@^4.0.8":
   "integrity" "sha1-gteb/zCmfEAF/9XiUVMArZyk168="
   "resolved" "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
   "version" "4.0.8"
@@ -6972,6 +6986,11 @@
   "integrity" "sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ=="
   "resolved" "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz"
   "version" "4.6.2"
+
+"lodash.throttle@^4.0.1":
+  "integrity" "sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ="
+  "resolved" "https://registry.npmjs.org/lodash.throttle/-/lodash.throttle-4.1.1.tgz"
+  "version" "4.1.1"
 
 "lodash.uniq@4.5.0":
   "integrity" "sha1-0CJTc662Uq3BvILklFM5qEJ1R3M="
