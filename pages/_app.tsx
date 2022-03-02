@@ -13,6 +13,7 @@ import "../styles/sign-up-success.css";
 import "../styles/sign-up-photo.css";
 import "../styles/sign-up-photo-success.css";
 import "../styles/complete-checkout.css";
+import "../styles/navbar-log-in.css";
 import type { AppProps } from "next/app";
 import "../styles/404-not-found.css";
 import Head from "next/head";

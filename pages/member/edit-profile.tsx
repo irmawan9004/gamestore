@@ -151,7 +151,6 @@ export default function EditProfile() {
               <div className="button-group d-flex flex-column pt-50">
                 <button
                   type="submit"
-                  role="button"
                   className="btn btn-save fw-medium text-lg text-white rounded-pill"
                 >
                   Save My Profile
