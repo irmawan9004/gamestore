@@ -10,6 +10,7 @@ export default function Auth(props: Partial<AuthProps>) {
     return (
       <li className="nav-item my-auto dropdown d-flex">
         <div className="vertical-line d-lg-block d-none" />
+        <div className="horizontal-line mt-6 mb-6 me-lg-35 ms-lg-35 d-lg-none d-block" />
         <div>
           <a
             className="dropdown-toggle ms-lg-40"
