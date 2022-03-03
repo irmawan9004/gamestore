@@ -35,7 +35,7 @@ export default function FeaturedGames() {
           />
           <GameItem
             title="Valorant"
-            category="Desktop"
+            category="Mobile"
             thumbnail="Thumbnail-5"
           />
         </div>
