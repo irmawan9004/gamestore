@@ -5,7 +5,7 @@ import SideBar from "../components/organism/Sidebar";
 export default function Member() {
   return (
     <section className="overview overflow-auto">
-      <SideBar />
+      <SideBar activeMenu="overview" />
       <OverviewContent />
     </section>
   );
