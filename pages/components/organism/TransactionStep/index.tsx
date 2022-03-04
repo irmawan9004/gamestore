@@ -11,19 +11,19 @@ export default function TransactionStep() {
         </h2>
         <div className="row gap-lg-0 gap-4" data-aos="fade-up">
           <StepItem
-            icon="step1"
+            icon="/icon/step1.svg"
             title="1. Start"
             description1="Pilih salah satu game"
             description2="yang ingin kamu top up"
           />
           <StepItem
-            icon="step2"
+            icon="/icon/step2.svg"
             title="1. Fill Up"
             description1="Top up sesuai dengan"
             description2="nominal yang sudah tersedia"
           />
           <StepItem
-            icon="step3"
+            icon="/icon/step3.svg"
             title="1. Start"
             description1="Siap digunakan untuk"
             description2="improve pemahaman kamu"
