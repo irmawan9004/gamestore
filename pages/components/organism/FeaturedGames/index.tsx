@@ -9,6 +9,7 @@ export default function FeaturedGames() {
       "https://gametore-gg.herokuapp.com/api/v1/players/landingpage"
     );
     console.log("response :", response.data);
+    setGameList(response.data.data);
   }, []);
   return (
     <section className="featured-game pt-50 pb-50">
