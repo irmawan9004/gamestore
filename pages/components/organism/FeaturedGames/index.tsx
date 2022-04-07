@@ -1,6 +1,15 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import GameItem from "../../moleculs/GameItem";
 
 export default function FeaturedGames() {
+  const [gamelist, setGamelist] = useState([]);
+  useEffect(async () => {
+    const response = await axios.get(
+      "https://gametore-gg.herokuapp.com/api/v1/players/landingpage"
+    );
+    console.log("response :", response.data);
+  }, []);
   return (
     <section className="featured-game pt-50 pb-50">
       <div className="container-fluid">
