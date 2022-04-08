@@ -1,15 +1,17 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { getFeaturedGame } from "../../../../services/player";
 import GameItem from "../../moleculs/GameItem";
 
 export default function FeaturedGames() {
   const [gameList, setGameList] = useState([]);
-  useEffect(async () => {
-    const response = await axios.get(
-      "https://gametore-gg.herokuapp.com/api/v1/players/landingpage"
-    );
-    console.log("response :", response.data);
-    setGameList(response.data.data);
+  const getFeaturedGameList = useCallback(async () => {
+    const data = await getFeaturedGame();
+    setGameList(data);
+  }, [getFeaturedGame]);
+
+  useEffect(() => {
+    getFeaturedGameList();
   }, []);
   return (
     <section className="featured-game pt-50 pb-50">
