@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export interface GameItemProps {
-  title: string;
+  title: String;
   category: string;
   thumbnail: string;
 }

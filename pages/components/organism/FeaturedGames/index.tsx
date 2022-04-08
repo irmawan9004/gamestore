@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
+import { GameItemTypes } from "../../../../services/data-types";
 import { getFeaturedGame } from "../../../../services/player";
 import GameItem from "../../moleculs/GameItem";
 
@@ -13,6 +13,8 @@ export default function FeaturedGames() {
   useEffect(() => {
     getFeaturedGameList();
   }, []);
+
+  const API_IMG = process.env.NEXT_PUBLIC_IMAGES;
   return (
     <section className="featured-game pt-50 pb-50">
       <div className="container-fluid">
@@ -25,12 +27,12 @@ export default function FeaturedGames() {
           className="d-flex flex-row flex-lg-wrap overflow-setting justify-content-lg-between gap-lg-3 gap-4"
           data-aos="fade-up"
         >
-          {gameList.map((item) => (
+          {gameList.map((item: GameItemTypes) => (
             <GameItem
               key={item._id}
               title={item.name}
               category={item.category.name}
-              thumbnail={`https://gametore-gg.herokuapp.com/uploads/${item.thumbnail}`}
+              thumbnail={`${API_IMG}/${item.thumbnail}`}
             />
           ))}
         </div>
