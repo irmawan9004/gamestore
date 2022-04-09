@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { getDetailVoucher } from "../../services/player";
 import Footer from "../components/organism/Footer";
 import NavBar from "../components/organism/NavBar";
@@ -8,16 +8,24 @@ import TopUpItem from "../components/organism/TopUpItem";
 
 export default function Detail() {
   const { query, isReady } = useRouter();
+  const [dataItem, setDataItem] = useState({
+    name: "",
+    thumbnail: "",
+    category: {
+      name: "",
+    },
+  });
 
-  const getVoucherDetailApi = useCallback(async (id) => {
+  const getVoucherDetailAPI = useCallback(async (id) => {
     const data = await getDetailVoucher(id);
     console.log("data:", data);
+    setDataItem(data);
   }, []);
 
   useEffect(() => {
     if (isReady) {
       console.log("router sudah tersedia", query.id);
-      getVoucherDetailApi(query.id);
+      getVoucherDetailAPI(query.id);
     } else {
       console.log("router tidak tersedia");
     }
@@ -37,10 +45,10 @@ export default function Detail() {
           </div>
           <div className="row">
             <div className="col-xl-3 col-lg-4 col-md-5 pb-30 pb-md-0 pe-md-25 text-md-start">
-              <TopUpItem type="mobile" />
+              <TopUpItem type="mobile" data={dataItem} />
             </div>
             <div className="col-xl-9 col-lg-8 col-md-7 ps-md-25">
-              <TopUpItem type="desktop" />
+              <TopUpItem type="desktop" data={dataItem} />
               <hr />
               <TopUpForm />
             </div>
