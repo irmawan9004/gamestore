@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
+import { getDetailVoucher } from "../../services/player";
 import Footer from "../components/organism/Footer";
 import NavBar from "../components/organism/NavBar";
 import TopUpForm from "../components/organism/TopUpForm";
@@ -8,9 +9,15 @@ import TopUpItem from "../components/organism/TopUpItem";
 export default function Detail() {
   const { query, isReady } = useRouter();
 
+  const getVoucherDetailApi = useCallback(async (id) => {
+    const data = await getDetailVoucher(id);
+    console.log("data:", data);
+  }, []);
+
   useEffect(() => {
     if (isReady) {
       console.log("router sudah tersedia", query.id);
+      getVoucherDetailApi(query.id);
     } else {
       console.log("router tidak tersedia");
     }
