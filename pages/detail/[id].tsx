@@ -1,10 +1,20 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import Footer from "../components/organism/Footer";
 import NavBar from "../components/organism/NavBar";
 import TopUpForm from "../components/organism/TopUpForm";
 import TopUpItem from "../components/organism/TopUpItem";
 
 export default function Detail() {
+  const { query, isReady } = useRouter();
+
+  useEffect(() => {
+    if (isReady) {
+      console.log("router sudah tersedia", query.id);
+    } else {
+      console.log("router tidak tersedia");
+    }
+  }, [isReady]);
   return (
     <>
       <NavBar />
