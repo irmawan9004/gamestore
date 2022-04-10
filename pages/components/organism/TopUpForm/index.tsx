@@ -24,7 +24,30 @@ export default function TopUpForm() {
           Nominal Top Up
         </p>
         <div className="row justify-content-between">
-          <NominalItem />
+          <NominalItem
+            _id="123"
+            coinName="Gold"
+            coinQuantity={20}
+            price={20000}
+          />
+          <NominalItem
+            _id="124"
+            coinName="Gold"
+            coinQuantity={20}
+            price={20000}
+          />
+          <NominalItem
+            _id="125"
+            coinName="Gold"
+            coinQuantity={20}
+            price={20000}
+          />
+          <NominalItem
+            _id="126"
+            coinName="Gold"
+            coinQuantity={20}
+            price={20000}
+          />
           <div className="col-lg-4 col-sm-6" />
         </div>
       </div>
@@ -34,8 +57,8 @@ export default function TopUpForm() {
         </p>
         <fieldset id="paymentMethod">
           <div className="row justify-content-between">
-            <PaymentItem />
-            <PaymentItem />
+            <PaymentItem bankId="127" type="Transfer" name="BCA" />
+            <PaymentItem bankId="128" type="Transfer" name="BCA" />
             <div className="col-lg-4 col-sm-6" />
           </div>
         </fieldset>
