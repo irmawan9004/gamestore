@@ -1,11 +1,17 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { getGameCategory } from "../services/player";
+import { setSignUp } from "../services/auth";
 
 export default function SignUpPhoto() {
   const [categories, setCategories] = useState([]);
-  const [favorite, setFavorite] = useState([]);
+  const [favorite, setFavorite] = useState("");
   const [image, setImage] = useState("");
+  const [imagePreview, setImagePreview] = useState(null);
+  const [localForm, setLocalForm] = useState({
+    name: "",
+    email: "",
+  });
 
   const getGameCategoryAPI = useCallback(async () => {
     const data = await getGameCategory();
@@ -18,8 +24,27 @@ export default function SignUpPhoto() {
     getGameCategoryAPI();
   }, []);
 
-  const onSubmit = () => {
-    console.log("favorite", favorite);
+  useEffect(() => {
+    const getLocalForm = localStorage.getItem("user-form");
+    setLocalForm(JSON.parse(getLocalForm));
+  }, []);
+
+  const onSubmit = async () => {
+    const getLocalForm = await localStorage.getItem("user-form");
+    const form = JSON.parse(getLocalForm);
+    const data = new FormData();
+    data.append("image", image);
+    data.append("email", form.email);
+    data.append("name", form.name);
+    data.append("password", form.password);
+    data.append("username", form.name);
+    data.append("phoneNumber", "081329519012");
+    data.append("role", "user");
+    data.append("status", "Y");
+    data.append("favorite", favorite);
+
+    const result = await setSignUp(data);
+    console.log("result : ", result);
   };
   return (
     <section className="sign-up-photo mx-auto pt-lg-227 pb-lg-227 pt-130 pb-50">
@@ -30,12 +55,20 @@ export default function SignUpPhoto() {
               <div className="mb-20">
                 <div className="image-upload text-center">
                   <label htmlFor="avatar">
-                    <Image
-                      src="/icon/upload.svg"
-                      width={120}
-                      height={120}
-                      alt="upload"
-                    />
+                    {image ? (
+                      <img
+                        src={imagePreview}
+                        className="img-preview"
+                        alt="upload"
+                      />
+                    ) : (
+                      <Image
+                        src="/icon/upload.svg"
+                        width={120}
+                        height={120}
+                        alt="upload"
+                      />
+                    )}
                   </label>
                   <input
                     id="avatar"
@@ -44,16 +77,18 @@ export default function SignUpPhoto() {
                     accept="image/png, image/jpeg"
                     onChange={(event) => {
                       console.log(event.target.files[0]);
-                      return setImage(event.target.files[0]);
+                      const img = event.target.files[0];
+                      setImagePreview(URL.createObjectURL(img));
+                      return setImage(img);
                     }}
                   />
                 </div>
               </div>
               <h2 className="fw-bold text-xl text-center color-palette-1 m-0">
-                Shayna Anne
+                {localForm.name}
               </h2>
               <p className="text-lg text-center color-palette-1 m-0">
-                shayna@anne.com
+                {localForm.email}
               </p>
               <div className="pt-50 pb-50">
                 <label
