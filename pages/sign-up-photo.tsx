@@ -5,6 +5,7 @@ import { getGameCategory } from "../services/player";
 export default function SignUpPhoto() {
   const [categories, setCategories] = useState([]);
   const [favorite, setFavorite] = useState([]);
+  const [image, setImage] = useState("");
 
   const getGameCategoryAPI = useCallback(async () => {
     const data = await getGameCategory();
@@ -41,6 +42,10 @@ export default function SignUpPhoto() {
                     type="file"
                     name="avatar"
                     accept="image/png, image/jpeg"
+                    onChange={(event) => {
+                      console.log(event.target.files[0]);
+                      return setImage(event.target.files[0]);
+                    }}
                   />
                 </div>
               </div>

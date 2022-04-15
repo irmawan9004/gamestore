@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Profile() {
   return (
     <div className="user text-center pb-50 pe-30">
