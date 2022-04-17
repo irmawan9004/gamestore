@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { getGameCategory } from "../services/player";
 import { setSignUp } from "../services/auth";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function SignUpPhoto() {
   const [categories, setCategories] = useState([]);
@@ -134,6 +135,7 @@ export default function SignUpPhoto() {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </section>
   );
 }
