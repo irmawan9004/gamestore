@@ -2,7 +2,9 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { getGameCategory } from "../services/player";
 import { setSignUp } from "../services/auth";
+import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignUpPhoto() {
   const [categories, setCategories] = useState([]);
@@ -14,9 +16,9 @@ export default function SignUpPhoto() {
     email: "",
   });
 
+  const router = useRouter();
   const getGameCategoryAPI = useCallback(async () => {
     const data = await getGameCategory();
-    console.log("data : ", data);
     setCategories(data);
     setFavorite(data[0]._id);
   }, [getGameCategory]);
@@ -45,7 +47,13 @@ export default function SignUpPhoto() {
     data.append("favorite", favorite);
 
     const result = await setSignUp(data);
-    console.log("result : ", result);
+    if (result?.error === 1) {
+      toast.error(result.message);
+    } else {
+      toast("SS");
+      router.push("/sign-up-success");
+      localStorage.removeItem("user-form");
+    }
   };
   return (
     <section className="sign-up-photo mx-auto pt-lg-227 pb-lg-227 pt-130 pb-50">
