@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export default function SignInForm() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <>
       <h2 className="text-4xl fw-bold color-palette-1 mb-10">Sign In</h2>
@@ -6,10 +10,7 @@ export default function SignInForm() {
         Masuk untuk melakukan proses top up
       </p>
       <div className="pt-50">
-        <label
-          htmlFor="email"
-          className="form-label text-lg fw-medium color-palette-1 mb-10"
-        >
+        <label className="form-label text-lg fw-medium color-palette-1 mb-10">
           Email Address
         </label>
         <input
@@ -19,6 +20,8 @@ export default function SignInForm() {
           name="email"
           aria-describedby="email"
           placeholder="Enter your email address"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
         />
       </div>
       <div className="pt-30">
