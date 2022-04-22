@@ -21,6 +21,7 @@ export default function SignUpForm() {
     };
     localStorage.setItem("user-form", JSON.stringify(userForm));
     router.push("/sign-up-photo");
+    
   };
   return (
     <>
