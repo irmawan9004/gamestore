@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
 
 interface AuthProps {
   isLogin?: boolean;
@@ -6,6 +9,12 @@ interface AuthProps {
 
 export default function Auth(props: Partial<AuthProps>) {
   const { isLogin } = props;
+  useEffect(() => {
+    const token = Cookies.get("token");
+    const jwtToken = atob(token);
+    const payload = jwt_decode(jwtToken);
+    const user = payload.user;
+  }, []);
   if (isLogin) {
     return (
       <li className="nav-item my-auto dropdown d-flex">
