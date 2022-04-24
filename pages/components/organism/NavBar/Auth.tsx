@@ -1,19 +1,27 @@
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 
-interface AuthProps {
-  isLogin?: boolean;
-}
+// interface AuthProps {
+//   isLogin?: boolean;
+// }
 
-export default function Auth(props: Partial<AuthProps>) {
+export default function Auth() {
   const { isLogin } = props;
+  const [isLogin, setIsLogin] = useState(false);
+  const [user, setUser] = useState({
+    avatar: "",
+    email: "",
+    id: "",
+    name: "",
+  });
   useEffect(() => {
     const token = Cookies.get("token");
     const jwtToken = atob(token);
     const payload = jwt_decode(jwtToken);
-    const user = payload.user;
+    const user = payload.player;
+    console.log("user :", user);
   }, []);
   if (isLogin) {
     return (
