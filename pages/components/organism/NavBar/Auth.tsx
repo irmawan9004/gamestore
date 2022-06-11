@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
+import jwtDecode from "jwt-decode";
+import { JWTPayloadTypes, UserTypes } from "../../../../services/data-types";
+import { useRouter } from "next/router";
 
 // interface AuthProps {
 //   isLogin?: boolean;
@@ -16,17 +18,26 @@ export default function Auth() {
     name: "",
     username: "",
   });
+  const router = useRouter();
   useEffect(() => {
     const token = Cookies.get("token");
-    const jwtToken = atob(token);
-    const payload = jwt_decode(jwtToken);
-    const user = payload.player;
-    const IMG = process.env.NEXT_PUBLIC_IMAGES;
-    user.avatar = `${IMG}/${user.avatar}`;
-    setIsLogin(true);
-    setUser(user);
-    console.log("user :", user);
+    if (token) {
+      const jwtToken = atob(token);
+      const payload: JWTPayloadTypes = jwtDecode(jwtToken);
+      const userFromPayload: UserTypes = payload.player;
+      const IMG = process.env.NEXT_PUBLIC_IMAGES;
+      user.avatar = `${IMG}/${userFromPayload.avatar}`;
+      setIsLogin(true);
+      setUser(user);
+    }
   }, []);
+
+  const onLogOut = () => {
+    Cookies.remove("token");
+    router.push("/");
+    setIsLogin(false);
+  };
+
   if (isLogin) {
     return (
       <li className="nav-item my-auto dropdown d-flex">
@@ -73,10 +84,8 @@ export default function Auth() {
                 </a>
               </Link>
             </li>
-            <li>
-              <Link href="/sign-in">
-                <a className="dropdown-item text-lg color-palette-2">Log Out</a>
-              </Link>
+            <li onClick={onLogOut}>
+              <a className="dropdown-item text-lg color-palette-2">Log Out</a>
             </li>
           </ul>
         </div>
@@ -85,7 +94,7 @@ export default function Auth() {
   }
   return (
     <li className="nav-item my-auto">
-      <Link href="/sign-up">
+      <Link href="/sign-in">
         <a
           className="btn btn-sign-in d-flex justify-content-center ms-lg-2 rounded-pill"
           role="button"
