@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { NominalsTypes, PaymentTypes } from "../../../../services/data-types";
+import {
+  BanksTypes,
+  NominalsTypes,
+  PaymentTypes,
+} from "../../../../services/data-types";
 import NominalItem from "./NominalItem";
 import PaymentItem from "./PaymentItem";
 
@@ -8,11 +12,21 @@ interface TopUpFormTypes {
   payments: PaymentTypes[];
 }
 export default function TopUpForm(props: TopUpFormTypes) {
+  const onPaymentItemChange = (payment: PaymentTypes, bank: BanksTypes) => {
+    console.log(payment);
+    console.log(bank);
+    const data = {
+      payment,
+      bank,
+    };
+    localStorage.setItem("payment-item", JSON.stringify(data));
+  };
   const onChangeClick = (data: NominalsTypes) => {
     console.log("data : ", data);
     localStorage.setItem("nominal-item", JSON.stringify(data));
   };
   const [verifyId, setVerifyID] = useState("");
+  const [bankAccountName, setBankAccountName] = useState("");
   const { nominals, payments } = props;
   return (
     <form action="./checkout.html" method="POST">
@@ -64,6 +78,7 @@ export default function TopUpForm(props: TopUpFormTypes) {
                   bankId={bank._id}
                   type={payment.type}
                   name={bank.bankName}
+                  onChange={() => onPaymentItemChange(payment, bank)}
                 />
               ))
             )}
@@ -85,16 +100,18 @@ export default function TopUpForm(props: TopUpFormTypes) {
           name="bankAccount"
           aria-describedby="bankAccount"
           placeholder="Enter your Bank Account Name"
+          value={bankAccountName}
+          onChange={(event) => setBankAccountName(event.target.value)}
         />
       </div>
       <div className="d-sm-block d-flex flex-column w-100">
-        <a
-          href="./checkout"
-          type="submit"
+        <button
+          type="button"
+          onClick={onSubmit}
           className="btn btn-submit rounded-pill fw-medium text-white border-0 text-lg"
         >
           Continue
-        </a>
+        </button>
       </div>
     </form>
   );
