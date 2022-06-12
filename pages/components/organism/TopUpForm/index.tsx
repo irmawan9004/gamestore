@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 import {
   BanksTypes,
@@ -12,22 +13,47 @@ interface TopUpFormTypes {
   payments: PaymentTypes[];
 }
 export default function TopUpForm(props: TopUpFormTypes) {
+  const [verifyId, setVerifyID] = useState("");
+  const [nominalItem, setNominalItem] = useState({});
+  const [paymentItem, setPaymentItem] = useState({});
+  const [bankAccountName, setBankAccountName] = useState("");
+  const { nominals, payments } = props;
+  const router = useRouter();
   const onPaymentItemChange = (payment: PaymentTypes, bank: BanksTypes) => {
-    console.log(payment);
-    console.log(bank);
     const data = {
       payment,
       bank,
     };
-    localStorage.setItem("payment-item", JSON.stringify(data));
+    setPaymentItem(data);
   };
-  const onChangeClick = (data: NominalsTypes) => {
-    console.log("data : ", data);
-    localStorage.setItem("nominal-item", JSON.stringify(data));
+  const onChangeIdClick = (data: NominalsTypes) => {
+    setNominalItem(data);
   };
-  const [verifyId, setVerifyID] = useState("");
-  const [bankAccountName, setBankAccountName] = useState("");
-  const { nominals, payments } = props;
+
+  const onSubmit = (data) => {
+    console.log("verifyID :", verifyId);
+    console.log("bankAccount :", bankAccountName);
+    console.log("nominalItem  :", nominalItem);
+    console.log("paymentItem  :", paymentItem);
+    if (
+      verifyId === "" ||
+      bankAccountName === "" ||
+      nominalItem === {} ||
+      paymentItem === {}
+    ) {
+      alert("Silahkan isi semua data!!");
+    } else {
+      const data = {
+        verifyId,
+        nominalItem,
+        paymentItem,
+        bankAccountName,
+      };
+      localStorage.setItem("data-top-up", JSON.stringify(data));
+      router.push("/checkout");
+    }
+  };
+
   return (
     <form action="./checkout.html" method="POST">
       <div className="pt-md-50 pt-30">
@@ -59,7 +85,7 @@ export default function TopUpForm(props: TopUpFormTypes) {
               coinName={nominal.coinName}
               coinQuantity={nominal.coinQuantity}
               price={nominal.price}
-              onChange={() => onChangeClick(nominal)}
+              onChange={() => onChangeIdClick(nominal)}
             />
           ))}
 
